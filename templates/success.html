@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h4>Filen är färdig</h4>
+<p>{{ deviations }} flexplatser hade avvikelser</p>
+
+<form method="post">
+    <input type="submit" name="download" value="Hämta filen" class="btn btn-outline-success">
+    <a href="{{ url_for('upload_file') }}" class="btn btn-outline-secondary">Tillbaka</a>
+</form>
+
+{% endblock %}

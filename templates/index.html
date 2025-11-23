@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}      
+<div class="flashes mt-2 mb-2 text-danger">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>
+<h4>Identifiera avvikelser hämtfrekvenser</h4>
+<p style="font-size: 14px"><i>Hitta mismatch på hämtfrekvens mellan mat- och restavfallskärl</i></p>
+<form method=post enctype=multipart/form-data>
+<div class="input-group mt-3">      
+  <input type=file name=file class="form-control" id="fileform">
+  <input type=submit value=Skicka class="btn btn-outline-secondary">
+  </form>
+</div>
+<div class="mt-4" style="font-size: 12px">
+  <p>Använd BI-bokmärket <i>ÅV Restavfall och matavfall hämtfrekvens.</i> Exportera resultatet till Excel, utan att ändra några kolumner</p>
+  <p>Ladda upp filen här. När den är färdigbehandlad kan du ladda ner resultatet</p>
+</div>      
+{% endblock %}

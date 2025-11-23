@@ -1,0 +1,8 @@
+__pycache__
+.git
+.env
+*.code-workspace
+venv
+files
+exempelfil.xlsx
+
