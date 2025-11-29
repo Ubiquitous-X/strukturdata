@@ -3,106 +3,71 @@
 
 <div class="row justify-content-center">
   <div class="col-lg-8">
-    <div class="flashes mt-2 mb-2 text-danger">
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {% for message in messages %}
+
+    <!-- Alert -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-danger alert-sm fade show" role="alert">
             {{ message }}
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
-    </div>
-  </div>
-</div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
-<!-- Block 1 -->
-<div class="row justify-content-center">
-  <div class="col-lg-8 bg-light p-4 border border-3 rounded">
+    <!-- Återanvädbart kort -->
+    {% macro upload_card(title, description, form_action) %}
+      <div class="card app-card mb-4">
+        <div class="card-body">
 
-    <h4>Matavfall med tätare intervall än restavfall</h4>
-    <p style="font-size: 14px">
-      <i>Hitta de flexplatser där matavfallet hämtas oftare än restavfallet</i>
-    </p>
+          <h5 class="card-title">{{ title }}</h5>
 
-    <form method="post" action="{{ url_for('hamtfrekvens_mat_rest.hamtfrekvens_mat_rest') }}" enctype="multipart/form-data">
-      <div class="input-group mt-3">
-        <input type="file" name="file" class="form-control" id="fileform">
-        <input type="submit" value="Skicka" class="btn btn-outline-secondary">
+          <p class="card-text text-muted" style="font-size:14px">
+            <em>{{ description }}</em>
+          </p>
+
+          <form method="post" action="{{ url_for(form_action) }}" enctype="multipart/form-data">
+            <div class="input-group">
+              <!-- Bootstrap visar valt filnamn automatiskt -->
+              <input type="file" name="file" class="form-control" aria-label="Välj fil">
+
+              <!-- Submit kan vara aktiv direkt -->
+              <input type="submit" value="Skicka" class="btn btn-outline-secondary">
+            </div>
+          </form>
+
+        </div>
       </div>
-    </form>
+    {% endmacro %}
 
-    <div class="mt-4" style="font-size: 12px">
-      <p>Använd BI-bokmärket <i>ÅV Restavfall och matavfall hämtfrekvens</i> i modulen Avtal och Tjänster</p>
-    </div>
 
-  </div>
-</div>
+    <!-- Block 1 -->
+    {{ upload_card(
+        "Matavfall med tätare hämtningsintervall än restavfall",
+        "Modul: Avtal och Tjänster - Bokmärke: ÅV Restavfall och matavfall hämtfrekvens",
+        'hamtfrekvens_mat_rest.hamtfrekvens_mat_rest'
+    ) }}
 
-<!-- Block 2 -->
-<div class="row justify-content-center mt-4">
-  <div class="col-lg-8 bg-light p-4 border border-3 rounded">
+    <!-- Block 2 -->
+    {{ upload_card(
+        "Matchning prisdel på avtal mot hämtfrekvens",
+        "Modul: Avtal och Tjänster - Bokmärke: ÅV Prisdel och hämtfrekvens",
+        'hamtfrekvens_prisdel.prisdel_check_upload'
+    ) }}
 
-    <h4>Prisdel matchar inte hämtfrekvens</h4>
-    <p style="font-size: 14px">
-      <i>Hitta flextjänster med mismatch mellan hämtfrekvens och prisdel</i>
-    </p>
+    <!-- Block 3 -->
+    {{ upload_card(
+        "Debiteringsgrupp fritidshus och villor",
+        "Modul: Avtal och Tjänster - Bokmärke: ÅV Debiteringsgrupp fritidshus och villor",
+        'debiteringsgrupp_check.debiteringsgrupp_upload'
+    ) }}
 
-    <form method="post" action="{{ url_for('hamtfrekvens_prisdel.prisdel_check_upload') }}" enctype="multipart/form-data">
-      <div class="input-group mt-3">
-        <input type="file" name="file" class="form-control">
-        <input type="submit" value="Skicka" class="btn btn-outline-secondary">
-      </div>
-    </form>
-
-    <div class="mt-4" style="font-size: 12px">
-      <p>Använd BI-bokmärket <i>ÅV Prisdel och hämtfrekvens</i> i modulen Avtal och Tjänster</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- Block 3 -->
-<div class="row justify-content-center mt-4">
-  <div class="col-lg-8 bg-light p-4 border border-3 rounded">
-
-    <h4>Debiteringsgrupp villor och fritidshus</h4>
-    <p style="font-size: 14px">
-      <i>Hitta avtal för villor och fritidshus som ligger med felaktig debiteringsgrupp</i>
-    </p>
-
-    <form method="post" action="{{ url_for('debiteringsgrupp_check.debiteringsgrupp_upload') }}" enctype="multipart/form-data">
-      <div class="input-group mt-3">
-        <input type="file" name="file" class="form-control">
-        <input type="submit" value="Skicka" class="btn btn-outline-secondary">
-      </div>
-    </form>
-
-    <div class="mt-4" style="font-size: 12px">
-      <p>Använd BI-bokmärket <i>ÅV Debiteringsgrupp fritidshus och villor</i> i modulen Avtal och Tjänster</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- Block 4 -->
-<div class="row justify-content-center mt-4 mb-4">
-  <div class="col-lg-8 bg-light p-4 border border-3 rounded">
-
-    <h4>Antalsvärde mot aktiva individer</h4>
-    <p style="font-size: 14px">
-      <i>Hitta de flextjänster som har annat antalsvärde än antalet aktiva individer</i>
-    </p>
-
-    <form method="post" action="{{ url_for('antalsvarde_individer.individer_check_upload') }}" enctype="multipart/form-data">
-      <div class="input-group mt-3">
-        <input type="file" name="file" class="form-control">
-        <input type="submit" value="Skicka" class="btn btn-outline-secondary">
-      </div>
-    </form>
-
-    <div class="mt-4" style="font-size: 12px">
-      <p>Använd BI-bokmärket <i>ÅV Kärl med antalsvärde och individer</i> i modulen Miljötjänster</p>
-    </div>
+    <!-- Block 4 -->
+    {{ upload_card(
+        "Antalsvärde på flextjänst mot antalet aktiva individer",
+        "Modul: Miljötjänster - Bokmärke: ÅV Kärl med antalsvärde och individer",
+        'antalsvarde_individer.individer_check_upload'
+    ) }}
 
   </div>
 </div>

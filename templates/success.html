@@ -2,19 +2,31 @@
 {% block content %}
 
 <div class="row justify-content-center">
-  <div class="col-lg-8 bg-light p-4 border border-3 rounded">
+  <div class="col-lg-8">
 
-    <h4>Filen är färdigbehandlad</h4>
-    <p>{{ message | safe }}</p>
+    <!-- Samma card-stil som index -->
+    <div class="card app-card">
+      <div class="card-body">
 
-    <form method="get" action="{{ url_for('download_file', filename=output_filename) }}">
-        <input type="submit" value="Hämta filen" class="btn btn-outline-success">
+        <h5 class="card-title">Filen är färdigbehandlad</h5>
 
-        <a href="{{ url_for(back_endpoint) }}"
-           class="btn btn-outline-secondary">
+        <!-- Message kan innehålla HTML, därför finns 'safe' här -->
+        <p class="mt-2">{{ message | safe }}</p>
+
+        <div class="mt-4 d-flex gap-2">
+          <form method="get" action="{{ url_for('download_file', filename=output_filename) }}">
+            <button type="submit" class="btn btn-success">
+              Hämta filen
+            </button>
+          </form>
+
+          <a href="{{ url_for(back_endpoint) }}" class="btn btn-outline-secondary">
             Tillbaka
-        </a>
-    </form>
+          </a>
+        </div>
+
+      </div>
+    </div>
 
   </div>
 </div>
