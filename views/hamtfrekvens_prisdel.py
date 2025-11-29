@@ -32,20 +32,23 @@ def process_prisdel(input_path: Path, output_path: Path) -> int:
 
     cols = list(df.columns)
 
-    # Hjälpfunktion för kontroll
-    def contains_substring(hamt, pris) -> bool:
-        # Hoppa över tomma hämtfrekvenser
-        if pd.isna(hamt) or str(hamt).strip() == "":
-            return True
-        # Hoppa över tomma prisdelar
-        if pd.isna(pris) or str(pris).strip() == "":
-            return False
+    # Hjälpfunktion för kontroll och förklaring
+    def check_and_reason(hamt, pris):
+
         hamt_s = str(hamt).strip().lower()
         pris_s = str(pris).strip().lower()
-        return hamt_s in pris_s
+        if hamt_s in pris_s:
+            return True, ""
+        else:
+            return False, f"Hämtfrekvens '{hamt}' finns inte i prisdelen på avtalet"
 
-    mask_ok = df.apply(lambda r: contains_substring(r[col_freq], r[col_pris]), axis=1)
-    deviations_df = df.loc[~mask_ok].copy()
+    # Kör kontrollen radvis och spara anledning för avvikelse
+    check_results = df.apply(lambda r: check_and_reason(r[col_freq], r[col_pris]), axis=1)
+    ok_mask = check_results.apply(lambda x: x[0])
+    reasons = check_results.apply(lambda x: x[1])
+
+    deviations_df = df.loc[~ok_mask].copy()
+    deviations_df['Orsak'] = reasons.loc[~ok_mask].values
 
     # Välj identifierande kolumner
     ident_cols = []
@@ -55,10 +58,10 @@ def process_prisdel(input_path: Path, output_path: Path) -> int:
                 ident_cols.append(c)
                 break
 
-    out_cols = ident_cols + [col_freq, col_pris]
+    out_cols = ident_cols + [col_freq, col_pris, 'Orsak']
     if not ident_cols:
         # Om inga identifierare finns, inkludera de tre första kolumnerna
-        out_cols = cols[:3] + [col_freq, col_pris]
+        out_cols = cols[:3] + [col_freq, col_pris, 'Orsak']
 
     out_df = deviations_df.loc[:, out_cols].copy()
 
@@ -76,7 +79,6 @@ def process_prisdel(input_path: Path, output_path: Path) -> int:
         worksheet.set_column(0, len(out_df.columns) - 1, 30, cell_fmt)
 
     return len(out_df)
-
 
 
 # Endpoint för filuppladdning och bearbetning

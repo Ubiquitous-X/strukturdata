@@ -44,37 +44,45 @@
     <!-- Block 1: Matavfall med tätare hämtningsintervall än restavfall -->
     {{ upload_card(
         "Matavfall med tätare hämtningsintervall än restavfall",
-        "Modul: Avtal och Tjänster - Bokmärke: ÅV Restavfall och matavfall hämtfrekvens",
+        "Modul: Avtal och Tjänster - Bokmärke: ÅV Kontroll matavfall/restavfall",
         'hamtfrekvens_mat_rest.hamtfrekvens_mat_rest'
     ) }}
 
-    <!-- Block 2: Matchning prisdel på avtal mot hämtfrekvens -->
+    <!-- Block 2: Prisdel på avtal mot flextjänstens hämtfrekvens -->
     {{ upload_card(
-        "Matchning av prisdel på avtal mot hämtfrekvens",
-        "Modul: Avtal och Tjänster - Bokmärke: ÅV Prisdel och hämtfrekvens",
+        "Prisdel på avtal mot flextjänstens hämtfrekvens",
+        "Modul: Avtal och Tjänster - Bokmärke: ÅV Kontroll prisdelar",
         'hamtfrekvens_prisdel.prisdel_check_upload'
     ) }}
 
     <!-- Block 3 Debiteringsgrupp fritidshus och villor -->
     {{ upload_card(
         "Debiteringsgrupp fritidshus och villor",
-        "Modul: Avtal och Tjänster - Bokmärke: ÅV Debiteringsgrupp fritidshus och villor",
+        "Modul: Avtal och Tjänster - Bokmärke: ÅV Kontroll debiteringsgrupp",
         'debiteringsgrupp_check.debiteringsgrupp_upload'
     ) }}
 
-    <!-- Block 4 Antalsvärde på flextjänst mot antalet aktiva individer -->
+    <!-- Block 4: Hämtfrekvens på dörrtillägg mot kärl på flexplats -->
+    {{ upload_card(
+        "Hämtfrekvens på dörrtillägg mot kärl på flexplats",
+        "Modul: Avtal och Tjänster - Bokmärke: ÅV Kontroll dörrtillägg",
+        'dorrtillagg_check.dorrtillagg_upload'
+    ) }}
+
+    <!-- Block 5 Antalsvärde på flextjänst mot antalet aktiva individer -->
     {{ upload_card(
         "Antalsvärde på flextjänst mot antalet aktiva individer",
-        "Modul: Miljötjänster - Bokmärke: ÅV Kärl med antalsvärde och individer",
+        "Modul: Miljötjänster - Bokmärke: ÅV Kontroll individer",
         'antalsvarde_individer.individer_check_upload'
     ) }}
 
-    <!-- Block 5: Slamanläggningar - kontroll av körtursplaner med mera -->
+    <!-- Block 6: Kontroll slamanläggningar -->
     {{ upload_card(
         "Slamanläggningar - kontroll av körtursplaner med mera",
-        "Modul: Miljötjänster - Bokmärke: ÅV Slamanläggningar med körturer",
+        "Modul: Miljötjänster - Bokmärke: ÅV Kontroll slamanläggningar",
         'slamanlaggningar_check.slamanlaggningar_upload'
     ) }}
+
   </div>
 </div>
 
