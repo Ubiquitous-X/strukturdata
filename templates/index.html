@@ -41,34 +41,40 @@
     {% endmacro %}
 
 
-    <!-- Block 1 -->
+    <!-- Block 1: Matavfall med tätare hämtningsintervall än restavfall -->
     {{ upload_card(
         "Matavfall med tätare hämtningsintervall än restavfall",
         "Modul: Avtal och Tjänster - Bokmärke: ÅV Restavfall och matavfall hämtfrekvens",
         'hamtfrekvens_mat_rest.hamtfrekvens_mat_rest'
     ) }}
 
-    <!-- Block 2 -->
+    <!-- Block 2: Matchning prisdel på avtal mot hämtfrekvens -->
     {{ upload_card(
-        "Matchning prisdel på avtal mot hämtfrekvens",
+        "Matchning av prisdel på avtal mot hämtfrekvens",
         "Modul: Avtal och Tjänster - Bokmärke: ÅV Prisdel och hämtfrekvens",
         'hamtfrekvens_prisdel.prisdel_check_upload'
     ) }}
 
-    <!-- Block 3 -->
+    <!-- Block 3 Debiteringsgrupp fritidshus och villor -->
     {{ upload_card(
         "Debiteringsgrupp fritidshus och villor",
         "Modul: Avtal och Tjänster - Bokmärke: ÅV Debiteringsgrupp fritidshus och villor",
         'debiteringsgrupp_check.debiteringsgrupp_upload'
     ) }}
 
-    <!-- Block 4 -->
+    <!-- Block 4 Antalsvärde på flextjänst mot antalet aktiva individer -->
     {{ upload_card(
         "Antalsvärde på flextjänst mot antalet aktiva individer",
         "Modul: Miljötjänster - Bokmärke: ÅV Kärl med antalsvärde och individer",
         'antalsvarde_individer.individer_check_upload'
     ) }}
 
+    <!-- Block 5: Slamanläggningar - kontroll av körtursplaner med mera -->
+    {{ upload_card(
+        "Slamanläggningar - kontroll av körtursplaner med mera",
+        "Modul: Miljötjänster - Bokmärke: ÅV Slamanläggningar med körturer",
+        'slamanlaggningar_check.slamanlaggningar_upload'
+    ) }}
   </div>
 </div>
 

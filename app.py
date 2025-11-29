@@ -8,6 +8,7 @@ from views.hamtfrekvens_mat_rest import bp as hamtfrekvens_mat_rest_bp
 from views.hamtfrekvens_prisdel import bp as hamtfrekvens_prisdel_bp
 from views.antalsvarde_individer import bp as antalsvarde_individer_bp
 from views.debiteringsgrupp_check import bp as debiteringsgrupp_check_bp
+from views.slamanlaggningar_check import bp as slamanlaggningar_check_bp
 
 load_dotenv(".env")
 
@@ -19,6 +20,7 @@ app.register_blueprint(hamtfrekvens_mat_rest_bp)
 app.register_blueprint(hamtfrekvens_prisdel_bp)
 app.register_blueprint(antalsvarde_individer_bp)
 app.register_blueprint(debiteringsgrupp_check_bp)
+app.register_blueprint(slamanlaggningar_check_bp)
 
 
 # Endpoint för startsidan
