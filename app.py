@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from flask import Flask, flash, request, session, url_for, redirect, render_template, send_from_directory, abort
 from dotenv import load_dotenv
+from werkzeug.exceptions import RequestEntityTooLarge
 from utils.file_utils import UPLOAD_FOLDER
 from views.hamtfrekvens_mat_rest import bp as hamtfrekvens_mat_rest_bp
 from views.hamtfrekvens_prisdel import bp as hamtfrekvens_prisdel_bp
@@ -63,6 +64,13 @@ def download_file(filename):
         abort(404)
 
     return send_from_directory(str(upload_resolved), filename, as_attachment=True)
+
+
+# Felhantering för för stora filer
+@app.errorhandler(RequestEntityTooLarge)
+def handle_large_file(e):
+    flash("Filen är för stor. Max tillåten storlek är 10 MB")
+    return redirect(url_for('index'))
 
 
 if __name__ == "__main__":
