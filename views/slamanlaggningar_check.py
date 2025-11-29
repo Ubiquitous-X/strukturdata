@@ -253,7 +253,7 @@ def slamanlaggningar_upload():
         return redirect(url_for('index'))
 
     if deviations > 0:
-        message = f"{deviations} rader hade avvikelser. Se filen för detaljer."
+        message = f"{deviations} anläggningar har avvikelser som behöver hanteras"
     else:
         message = "Inga avvikelser hittades."
 

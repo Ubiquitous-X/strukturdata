@@ -115,7 +115,7 @@ def prisdel_check_upload():
         return redirect(url_for('index'))
 
     if deviations > 0:
-        message = f"{deviations} flextjänster har mismatch mellan hämtfrekvensen och prisdelen på avtalet."
+        message = f"{deviations} flextjänster har mismatch mellan hämtfrekvensen och prisdelen på avtalet"
     else:
         message = "Inga avvikelser hittades."
 
